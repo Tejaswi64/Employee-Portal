@@ -1,0 +1,78 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container">
+    <div class="form-group">
+      <label for="inputField">Input Field</label>
+      <input 
+        id="inputField" 
+        formControlName="inputField" 
+        placeholder="Enter Text" 
+        type="text" 
+        class="input-field"
+      />
+      <div *ngIf="form.controls['inputField'].invalid && form.controls['inputField'].touched">
+        <small class="error" *ngIf="form.controls['inputField'].errors?.['required']">Input is required</small>
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="description">Text Area</label>
+      <textarea 
+        id="description" 
+        formControlName="description" 
+        placeholder="Enter description" 
+        rows="5"
+        class="input-field">
+      </textarea>
+      <div *ngIf="form.controls['description'].invalid && form.controls['description'].touched">
+        <small class="error" *ngIf="form.controls['description'].errors?.['required']">Description is required</small>
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="selectedOption">Select an Option</label>
+      <select id="selectedOption" formControlName="selectedOption" class="input-field">
+        <option value="" disabled>Select an option</option>
+        <option *ngFor="let option of options" [value]="option">{{ option }}</option>
+      </select>
+      <div *ngIf="form.controls['selectedOption'].invalid && form.controls['selectedOption'].touched">
+        <small class="error" *ngIf="form.controls['selectedOption'].errors?.['required']">Option is required</small>
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label>Radio Button</label>
+      <div class="radio-group">
+        <div *ngFor="let radio of radioOptions" class="radio-option">
+          <input 
+            type="radio" 
+            [value]="radio" 
+            formControlName="radioOption" 
+            id="{{ radio }}" 
+            class="radio-input"
+          />
+          <label for="{{ radio }}">{{ radio }}</label>
+        </div>
+      </div>
+      <div *ngIf="form.controls['radioOption'].invalid && form.controls['radioOption'].touched">
+        <small class="error" *ngIf="form.controls['radioOption'].errors?.['required']">Radio Option is required</small>
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label class="checkbox-label">
+        <input type="checkbox" formControlName="agreeToTerms" />
+        I agree to the terms and conditions
+      </label>
+      <div *ngIf="form.controls['agreeToTerms'].invalid && form.controls['agreeToTerms'].touched">
+        <small class="error" *ngIf="form.controls['agreeToTerms'].errors?.['requiredTrue']">
+          You must agree to the terms and conditions
+        </small>
+      </div>
+    </div>
+    
+    <button type="submit" [disabled]="form.invalid" class="button">Submit</button>
+    <div *ngIf="showSuccessMessage" class="success-message">
+      Data has been successfully saved!
+    </div>
+    <button (click)="goBack()" class="button">Back to Dashboard</button>
+  </form>
+  

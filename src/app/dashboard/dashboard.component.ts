@@ -46,6 +46,10 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/user-info']);
   }
 
+  openform():void{
+    this.router.navigate(['/validations'])
+  }
+
   viewAllUsers(): void {
     this.router.navigate(['/all-users']);
   }
