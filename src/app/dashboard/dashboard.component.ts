@@ -71,17 +71,18 @@ export class DashboardComponent implements OnInit {
     this.newPassword = '';
   }
 
-  onChangePassword(): void {
-    if (this.authService.getCurrentUser()?.password === this.currentPassword) {
-      this.authService.updatePassword(this.newPassword);
-      this.changePasswordSuccess = 'Password changed successfully!';
-      this.changePasswordError = null;
-      this.closeChangePasswordModal();
-    } else {
-      this.changePasswordError = 'Current password is incorrect.';
-      this.changePasswordSuccess = null;
+    onChangePassword(): void {
+      if (this.newPassword.trim()) {
+        this.authService.updatePassword(this.newPassword);
+        this.changePasswordSuccess = 'Password changed successfully!';
+        this.changePasswordError = null;
+        this.closeChangePasswordModal();
+      } else {
+        this.changePasswordError = 'New password cannot be empty.';
+        this.changePasswordSuccess = null;
+      }
     }
-  }
+       
 
   openAddEmployeeModal(): void {
     this.isAddEmployeeModalOpen = true;
